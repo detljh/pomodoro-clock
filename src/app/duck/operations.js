@@ -1,38 +1,74 @@
 import Creators from './actions.js';
 
+const  tick = (dispatch, getState, initial=false) => {
+    setTimeout(() => {
+        if (initial) {
+            dispatch(Creators.start());
+        } else {
+            dispatch(Creators.tick());
+        }
+        
+        const timeLeft = getState().home.timeLeft;
+        const isRunning = getState().home.isRunning;
+        if (timeLeft > 0 && isRunning) {
+            tick(dispatch, getState);
+        }
+    }, 1000);
+}
+
 const startStop = () => {
-    return (dispatch, getState) {
+    return (dispatch, getState) => {
         const isRunning = getState().home.isRunning;
         if (isRunning) {
             dispatch(Creators.stop());
         } else {
-            dispatch(Creators.start());
+            tick(dispatch, getState, true);
         }
     };
 };
 
 const increment = (type) => {
-    return (dispatch) {
+    return (dispatch, getState) => {
+        const isRunning = getState().home.isRunning;
+        if (isRunning) {
+            return;
+        }
         if (type === "break") {
-            dispatch(Creators.incrementBreak());
+            if (getState().home.breakLength < 60) {
+                dispatch(Creators.incrementBreak());
+            }
         } else if (type === "session") {
-            dispatch(Creators.incrementSession());
+            if (getState().home.sessionLength < 60) {
+                let timeLeft = (getState().home.sessionLength + 1) * 60;
+                dispatch(Creators.incrementSession(timeLeft));
+            }
         }
     };
 };
 
 const decrement = (type) => {
-    return (dispatch) {
+    return (dispatch, getState) => {
+        const isRunning = getState().home.isRunning;
+        if (isRunning) {
+            return;
+        }
         if (type === "break") {
-            dispatch(Creators.decrementBreak());
+            if (getState().home.breakLength > 1) {
+                dispatch(Creators.decrementBreak());
+            }
         } else if (type === "session") {
-            dispatch(Creators.decrementSession());
+            if (getState().home.sessionLength > 1) {
+                let timeLeft = (getState().home.sessionLength - 1) * 60;
+                dispatch(Creators.decrementSession(timeLeft));
+            }
         }
     };
 };
 
 const reset = () => {
-
+    return (dispatch) => {
+        dispatch(Creators.reset());
+    };
 }
 
 export default {

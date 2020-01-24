@@ -11,11 +11,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        increment: (event) => {
-            dispatch(homeOperations.increment(event.target.id));
+        increment: (type) => {
+            dispatch(homeOperations.increment(type));
         },
-        decrement: (event) => {
-            dispatch(homeOperations.decrement(event.target.id));
+        decrement: (type) => {
+            dispatch(homeOperations.decrement(type));
         }
     };
 }

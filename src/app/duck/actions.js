@@ -12,21 +12,23 @@ const decrementBreak = () => {
     };
 }
 
-const incrementSession = () => {
+const incrementSession = (timeLeft) => {
     return {
-        type: types.INCREMENT_SESSION
+        type: types.INCREMENT_SESSION,
+        timeLeft: timeLeft
     };
 }
 
-const decrementSession = () => {
+const decrementSession = (timeLeft) => {
     return {
-        type: types.DECREMENT_SESSION
+        type: types.DECREMENT_SESSION,
+        timeLeft: timeLeft
     };
 }
 
 const start = () => {
     return {
-        type: types.START
+        type: types.START,
     }
 }
 
@@ -42,6 +44,12 @@ const reset = () => {
     };
 }
 
+const tick = () => {
+    return {
+        type: types.TICK
+    };
+}
+
 export default { 
     incrementBreak,
     decrementBreak,
@@ -49,5 +57,6 @@ export default {
     decrementSession,
     start,
     stop,
-    reset
+    reset,
+    tick
 };

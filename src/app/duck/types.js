@@ -5,6 +5,7 @@ const DECREMENT_SESSION = 'DECREMENT_SESSION';
 const START = 'START';
 const STOP = 'STOP';
 const RESET = 'RESET';
+const TICK = 'TICK';
 
 export default {
     INCREMENT_BREAK,
@@ -13,5 +14,6 @@ export default {
     DECREMENT_SESSION,
     START,
     STOP,
-    RESET
+    RESET,
+    TICK
 };
