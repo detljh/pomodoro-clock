@@ -5,7 +5,9 @@ import { homeOperations } from './duck';
 const mapStateToProps = (state) => {
     return {
         timerLabel: state.home.timerLabel,
-        timeLeft: state.home.timeLeft
+        timeLeft: state.home.timeLeft,
+        audioPlay: state.home.audioPlay,
+        resetAudio: state.home.resetAudio
     };
 }
 

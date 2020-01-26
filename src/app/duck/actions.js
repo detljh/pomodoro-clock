@@ -1,14 +1,16 @@
 import types from './types.js';
 
-const incrementBreak = () => {
+const incrementBreak = (timeLeft) => {
     return {
-        type: types.INCREMENT_BREAK
+        type: types.INCREMENT_BREAK,
+        timeLeft: timeLeft
     };
 }
 
-const decrementBreak = () => {
+const decrementBreak = (timeLeft) => {
     return {
-        type: types.DECREMENT_BREAK
+        type: types.DECREMENT_BREAK,
+        timeLeft: timeLeft
     };
 }
 
@@ -62,6 +64,12 @@ const startSession = () => {
     };
 }
 
+const playAudio = () => {
+    return {
+        type: types.PLAY_AUDIO
+    };
+}
+
 export default { 
     incrementBreak,
     decrementBreak,
@@ -72,5 +80,6 @@ export default {
     reset,
     tick,
     startBreak,
-    startSession
+    startSession,
+    playAudio
 };

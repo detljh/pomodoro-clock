@@ -4,7 +4,7 @@ let timer = 0;
 
 const tick = (dispatch, getState) => {
     return setInterval(() => {
-        const timeLeft = getState().home.timeLeft;
+        let timeLeft = getState().home.timeLeft;
         if (timeLeft <= 0) {
             const timerLabel = getState().home.timerLabel;
             if (timerLabel === "Session") {
@@ -14,17 +14,21 @@ const tick = (dispatch, getState) => {
             } 
         } else {
             dispatch(Creators.tick());
+            timeLeft = getState().home.timeLeft;
+            if (timeLeft <= 0) {
+                dispatch(Creators.playAudio());
+            }
         }
     }, 1000);
 }
 
 const startStop = () => {
     return (dispatch, getState) => {
+        if (timer) {
+            clearInterval(timer);
+        }
         const isRunning = getState().home.isRunning;
         if (isRunning) {
-            if (timer) {
-                clearTimeout(timer);
-            }
             dispatch(Creators.stop());
         } else {
             dispatch(Creators.start());
@@ -41,11 +45,18 @@ const increment = (type) => {
         }
         if (type === "break") {
             if (getState().home.breakLength < 60) {
-                dispatch(Creators.incrementBreak());
+                let timeLeft = getState().home.timeLeft;
+                if (getState().home.timerLabel === "Break") {
+                    timeLeft = (getState().home.breakLength + 1) * 60;
+                }
+                dispatch(Creators.incrementBreak(timeLeft));
             }
         } else if (type === "session") {
             if (getState().home.sessionLength < 60) {
-                let timeLeft = (getState().home.sessionLength + 1) * 60;
+                let timeLeft = getState().home.timeLeft;
+                if (getState().home.timerLabel === "Session") {
+                    timeLeft = (getState().home.sessionLength + 1) * 60;
+                }
                 dispatch(Creators.incrementSession(timeLeft));
             }
         }
@@ -60,11 +71,18 @@ const decrement = (type) => {
         }
         if (type === "break") {
             if (getState().home.breakLength > 1) {
-                dispatch(Creators.decrementBreak());
+                let timeLeft = getState().home.timeLeft;
+                if (getState().home.timerLabel === "Break") {
+                    timeLeft = (getState().home.breakLength - 1) * 60;
+                }
+                dispatch(Creators.decrementBreak(timeLeft));
             }
         } else if (type === "session") {
             if (getState().home.sessionLength > 1) {
-                let timeLeft = (getState().home.sessionLength - 1) * 60;
+                let timeLeft = getState().home.timeLeft;
+                if (getState().home.timerLabel === "Session") {
+                    timeLeft = (getState().home.sessionLength - 1) * 60;
+                }
                 dispatch(Creators.decrementSession(timeLeft));
             }
         }
@@ -74,7 +92,7 @@ const decrement = (type) => {
 const reset = () => {
     return (dispatch) => {
         if (timer) {
-            clearTimeout(timer);
+            clearInterval(timer);
         }
         dispatch(Creators.reset());
     };

@@ -8,6 +8,7 @@ const TICK = 'TICK';
 const START_BREAK = 'START_BREAK';
 const START_SESSION = 'START_SESSION';
 const INITIAL_START = 'INITIAL_START';
+const PLAY_AUDIO = 'PLAY_AUDIO';
 
 export default {
     INCREMENT_BREAK,
@@ -19,5 +20,6 @@ export default {
     TICK,
     START_BREAK,
     START_SESSION,
-    INITIAL_START
+    INITIAL_START,
+    PLAY_AUDIO
 };
