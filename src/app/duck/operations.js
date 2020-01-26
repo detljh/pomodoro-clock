@@ -2,15 +2,19 @@ import Creators from './actions.js';
 
 const  tick = (dispatch, getState, initial=false) => {
     setTimeout(() => {
+        const timeLeft = getState().home.timeLeft;
+        let isRunning = getState().home.isRunning;
         if (initial) {
-            dispatch(Creators.start());
-        } else {
-            dispatch(Creators.tick());
+            isRunning = true;
         }
         
-        const timeLeft = getState().home.timeLeft;
-        const isRunning = getState().home.isRunning;
         if (timeLeft > 0 && isRunning) {
+            if (initial) {
+                dispatch(Creators.start());
+            } else {
+                dispatch(Creators.tick());
+            }
+            
             tick(dispatch, getState);
         }
     }, 1000);
