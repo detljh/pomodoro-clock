@@ -16,7 +16,6 @@ const homeReducer = (state=INITIAL_STATE, action) => {
             });
         case types.START:
             return Object.assign({}, state, {
-                timeLeft: state.timeLeft - 1,
                 isRunning: true
             });
         case types.STOP:

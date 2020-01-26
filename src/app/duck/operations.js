@@ -1,20 +1,16 @@
 import Creators from './actions.js';
 
-const  tick = (dispatch, getState, initial=false) => {
+const tick = (dispatch, getState, initial=false) => {
+    if (initial) {
+        dispatch(Creators.start());
+    }
+
     setTimeout(() => {
         const timeLeft = getState().home.timeLeft;
         let isRunning = getState().home.isRunning;
-        if (initial) {
-            isRunning = true;
-        }
         
         if (timeLeft > 0 && isRunning) {
-            if (initial) {
-                dispatch(Creators.start());
-            } else {
-                dispatch(Creators.tick());
-            }
-            
+            dispatch(Creators.tick());
             tick(dispatch, getState);
         }
     }, 1000);
