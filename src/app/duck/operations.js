@@ -1,17 +1,19 @@
 import Creators from './actions.js';
 
-const tick = (dispatch, getState, initial=false) => {
-    if (initial) {
-        dispatch(Creators.start());
-    }
+let timer = 0;
 
-    setTimeout(() => {
+const tick = (dispatch, getState) => {
+    return setInterval(() => {
         const timeLeft = getState().home.timeLeft;
-        let isRunning = getState().home.isRunning;
-        
-        if (timeLeft > 0 && isRunning) {
+        if (timeLeft <= 0) {
+            const timerLabel = getState().home.timerLabel;
+            if (timerLabel === "Session") {
+                dispatch(Creators.startBreak());
+            } else {
+                dispatch(Creators.startSession());
+            } 
+        } else {
             dispatch(Creators.tick());
-            tick(dispatch, getState);
         }
     }, 1000);
 }
@@ -20,9 +22,13 @@ const startStop = () => {
     return (dispatch, getState) => {
         const isRunning = getState().home.isRunning;
         if (isRunning) {
+            if (timer) {
+                clearTimeout(timer);
+            }
             dispatch(Creators.stop());
         } else {
-            tick(dispatch, getState, true);
+            dispatch(Creators.start());
+            timer = tick(dispatch, getState);
         }
     };
 };
@@ -67,6 +73,9 @@ const decrement = (type) => {
 
 const reset = () => {
     return (dispatch) => {
+        if (timer) {
+            clearTimeout(timer);
+        }
         dispatch(Creators.reset());
     };
 }

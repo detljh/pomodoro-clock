@@ -28,7 +28,7 @@ const decrementSession = (timeLeft) => {
 
 const start = () => {
     return {
-        type: types.START,
+        type: types.INITIAL_START,
     }
 }
 
@@ -50,6 +50,18 @@ const tick = () => {
     };
 }
 
+const startBreak = () => {
+    return {
+        type: types.START_BREAK
+    };
+}
+
+const startSession = () => {
+    return {
+        type: types.START_SESSION
+    };
+}
+
 export default { 
     incrementBreak,
     decrementBreak,
@@ -58,5 +70,7 @@ export default {
     start,
     stop,
     reset,
-    tick
+    tick,
+    startBreak,
+    startSession
 };

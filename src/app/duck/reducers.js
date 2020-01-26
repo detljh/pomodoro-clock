@@ -10,13 +10,25 @@ const INITIAL_STATE = {
 
 const homeReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
+        case types.INITIAL_START:
+            return Object.assign({}, state, {
+                isRunning: true
+            });
+        case types.START_SESSION:
+            return Object.assign({}, state, {
+                timeLeft: state.sessionLength * 60,
+                isRunning: true,
+                timerLabel: 'Session'
+            });
+        case types.START_BREAK:
+            return Object.assign({}, state, {
+                timeLeft: state.breakLength * 60,
+                isRunning: true,
+                timerLabel: 'Break'
+            });
         case types.TICK:
             return Object.assign({}, state, {
                 timeLeft: state.timeLeft - 1,
-            });
-        case types.START:
-            return Object.assign({}, state, {
-                isRunning: true
             });
         case types.STOP:
             return Object.assign({}, state, {
