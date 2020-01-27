@@ -1,14 +1,45 @@
+@import url(//db.onlinewebfonts.com/c/63f874d192fb3892d88d5e26f942b5e2?family=DS-Digital);
+
 #timer-container {
-    width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
 
     #timer {
+        margin: auto;
+        width: 100%;
 
-    }
-    
-    #controls {
-        
-    }
+        #timer-label {
+            display: block;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        #timer-controls-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+
+            #time-left {
+                margin-left: 0.2em;
+                margin-right: 0.1em;
+                display: block;
+                font-family: 'DS-Digital';
+                font-size: 6em;
+            }
+        }
+    } 
+}
+
+.controls {
+    cursor: pointer;
+}
+
+#start-stop {
+    font-size: 2.3em;
+}
+
+#reset {
+    font-size: 1.3em;
 }

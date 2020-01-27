@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
 html, body {
     margin: 0;
     height: 100%;
     padding: 0;
-    overflow-y: hidden;
+    overflow-x: hidden;
+    font-family: 'Source Sans Pro';
+}
+
+@media (min-width: 320px) {
+    html, body {
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 600px) {
+    html, body {
+        font-size: 1.1em;
+    }
 }

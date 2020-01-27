@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
         timerLabel: state.home.timerLabel,
         timeLeft: state.home.timeLeft,
         audioPlay: state.home.audioPlay,
-        resetAudio: state.home.resetAudio
+        resetAudio: state.home.resetAudio,
+        isRunning: state.home.isRunning
     };
 }
 

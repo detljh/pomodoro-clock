@@ -1,6 +1,8 @@
 import React from 'react';
 import alarm from './beep.mp3';
 import './timer.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 class TimerComponent extends React.Component {
     constructor(props) {
@@ -28,16 +30,18 @@ class TimerComponent extends React.Component {
     }
 
     render() {
+        const startStopIcon = this.props.isRunning ? faPause : faPlay;
         return (
             <div id="timer-container">
                 <div id="timer">
                     <span id="timer-label">{this.props.timerLabel}</span>
-                    <span id="time-left">{this.getTimeDisplay()}</span>
+                    <div id="timer-controls-container">
+                        <FontAwesomeIcon className="controls" icon={faSyncAlt} id="reset" onClick={this.props.reset} />
+                        <span id="time-left">{this.getTimeDisplay()}</span>
+                        <FontAwesomeIcon className="controls" icon={startStopIcon} id="start-stop" onClick={this.props.startStop} /> 
+                    </div>
                 </div>
-                <div id="controls">
-                    <span id="start_stop" onClick={this.props.startStop}>start_stop</span>
-                    <span id="reset" onClick={this.props.reset}>reset</span>
-                </div>
+                
                 <audio preload="auto" id="beep" src={alarm} ref={this.audio}/>
             </div>
         );
