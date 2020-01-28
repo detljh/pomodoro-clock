@@ -46,9 +46,10 @@ const reset = () => {
     };
 }
 
-const tick = () => {
+const tick = (progress) => {
     return {
-        type: types.TICK
+        type: types.TICK,
+        progress: progress
     };
 }
 
@@ -70,6 +71,13 @@ const playAudio = () => {
     };
 }
 
+const updateTotalTime = (time) => {
+    return {
+        type: types.UPDATE_TOTAL_TIME,
+        totalTime: time
+    };
+}
+
 export default { 
     incrementBreak,
     decrementBreak,
@@ -81,5 +89,6 @@ export default {
     tick,
     startBreak,
     startSession,
-    playAudio
+    playAudio,
+    updateTotalTime
 };

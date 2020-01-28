@@ -5,7 +5,10 @@ import { homeOperations } from './duck';
 const mapStateToProps = (state) => {
     return {
         breakLength: state.home.breakLength,
-        sessionLength: state.home.sessionLength
+        sessionLength: state.home.sessionLength,
+        progress: state.home.progress,
+        timerLabel: state.home.timerLabel,
+        timeLeft: state.home.timeLeft
     };
 }
 

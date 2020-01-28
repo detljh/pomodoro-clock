@@ -13,6 +13,7 @@ class TimerComponent extends React.Component {
 
     componentDidUpdate() {
         if (this.props.audioPlay) {
+            console.log("alarm");
             this.audio.current.play();
         } else if (this.props.resetAudio) {
             this.audio.current.pause();

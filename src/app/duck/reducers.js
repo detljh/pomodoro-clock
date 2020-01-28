@@ -5,13 +5,19 @@ const INITIAL_STATE = {
     sessionLength: 25,
     timerLabel: 'Session',
     isRunning: false,
-    timeLeft: 25 * 60 ,
+    timeLeft: 25 * 60,
+    totalTime: 25 * 60,
     audioPlay: false,
-    resetAudio: false
+    resetAudio: false,
+    progress: 0
 };
 
 const homeReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
+        case types.UPDATE_TOTAL_TIME:
+            return Object.assign({}, state, {
+                totalTime: action.totalTime,
+            });
         case types.PLAY_AUDIO:
             return Object.assign({}, state, {
                 audioPlay: true
@@ -23,21 +29,26 @@ const homeReducer = (state=INITIAL_STATE, action) => {
         case types.START_SESSION:
             return Object.assign({}, state, {
                 timeLeft: state.sessionLength * 60,
+                totalTime: state.sessionLength * 60,
                 isRunning: true,
                 timerLabel: 'Session',
-                audioPlay: false
+                audioPlay: false,
+                progress: 0
             });
         case types.START_BREAK:
             return Object.assign({}, state, {
                 timeLeft: state.breakLength * 60,
+                totalTime: state.breakLength * 60,
                 isRunning: true,
                 timerLabel: 'Break',
-                audioPlay: false
+                audioPlay: false,
+                progress: 0
             });
         case types.TICK:
             return Object.assign({}, state, {
                 timeLeft: state.timeLeft - 1,
-                audioPlay: false
+                audioPlay: false,
+                progress: action.progress
             });
         case types.STOP:
             return Object.assign({}, state, {

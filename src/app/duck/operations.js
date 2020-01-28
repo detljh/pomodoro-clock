@@ -13,7 +13,10 @@ const tick = (dispatch, getState) => {
                 dispatch(Creators.startSession());
             } 
         } else {
-            dispatch(Creators.tick());
+            timeLeft = getState().home.timeLeft;
+            const totalTime = getState().home.totalTime;
+            const progress = (totalTime - timeLeft + 1) / (totalTime / 100);
+            dispatch(Creators.tick(progress));
             timeLeft = getState().home.timeLeft;
             if (timeLeft <= 0) {
                 dispatch(Creators.playAudio());
@@ -31,6 +34,14 @@ const startStop = () => {
         if (isRunning) {
             dispatch(Creators.stop());
         } else {
+            const timerLabel = getState().home.timerLabel;
+            if (timerLabel === "Session") {
+                const time = getState().home.sessionLength * 60;
+                dispatch(Creators.updateTotalTime(time));
+            } else {
+                const time = getState().home.breakLength * 60;
+                dispatch(Creators.updateTotalTime(time));
+            }
             dispatch(Creators.start());
             timer = tick(dispatch, getState);
         }
