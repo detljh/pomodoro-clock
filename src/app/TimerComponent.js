@@ -12,12 +12,15 @@ class TimerComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.audioPlay) {
-            console.log("alarm");
-            this.audio.current.play();
-        } else if (this.props.resetAudio) {
+        
+        if (this.audio.current.currentTime >= this.audio.current.duration - 0.5) {
+            this.props.disableAlarmBlink();
             this.audio.current.pause();
             this.audio.current.currentTime = 0;
+        }
+
+        if (this.props.audioPlay) {
+            this.audio.current.play();
         }
     }
 
@@ -35,10 +38,14 @@ class TimerComponent extends React.Component {
         return (
             <div id="timer-container">
                 <div id="timer">
-                    <span id="timer-label">{this.props.timerLabel}</span>
+                    <span id={"timer-label"}>
+                        {this.props.timerLabel}
+                    </span>
                     <div id="timer-controls-container">
                         <FontAwesomeIcon className="controls" icon={faSyncAlt} id="reset" onClick={this.props.reset} />
-                        <span id="time-left">{this.getTimeDisplay()}</span>
+                        <span className={this.props.alarmBlink ? "timer-blink" : ""} id="time-left">
+                            {this.getTimeDisplay()}
+                            </span>
                         <FontAwesomeIcon className="controls" icon={startStopIcon} id="start-stop" onClick={this.props.startStop} /> 
                     </div>
                 </div>

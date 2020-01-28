@@ -9,18 +9,24 @@ const INITIAL_STATE = {
     totalTime: 25 * 60,
     audioPlay: false,
     resetAudio: false,
-    progress: 0
+    progress: 0,
+    alarmBlink: false
 };
 
 const homeReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
+        case types.DISABLE_ALARM_BLINK:
+            return Object.assign({}, state, {
+                alarmBlink: false
+            });
         case types.UPDATE_TOTAL_TIME:
             return Object.assign({}, state, {
                 totalTime: action.totalTime,
             });
         case types.PLAY_AUDIO:
             return Object.assign({}, state, {
-                audioPlay: true
+                audioPlay: true,
+                alarmBlink: true
             });
         case types.INITIAL_START:
             return Object.assign({}, state, {

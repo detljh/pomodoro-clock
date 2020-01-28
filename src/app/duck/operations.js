@@ -1,5 +1,7 @@
 import Creators from './actions.js';
 
+const disableAlarmBlink = Creators.disableAlarmBlink;
+
 let timer = 0;
 
 const tick = (dispatch, getState) => {
@@ -113,5 +115,6 @@ export default {
     startStop,
     increment,
     decrement,
-    reset
+    reset,
+    disableAlarmBlink
 };

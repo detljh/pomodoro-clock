@@ -78,6 +78,12 @@ const updateTotalTime = (time) => {
     };
 }
 
+const disableAlarmBlink = () => {
+    return {
+        type: types.DISABLE_ALARM_BLINK
+    };
+}
+
 export default { 
     incrementBreak,
     decrementBreak,
@@ -90,5 +96,6 @@ export default {
     startBreak,
     startSession,
     playAudio,
-    updateTotalTime
+    updateTotalTime,
+    disableAlarmBlink
 };
