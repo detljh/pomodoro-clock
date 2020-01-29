@@ -3,6 +3,7 @@ import alarm from './beep.mp3';
 import './timer.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import './app.scss';
 
 class TimerComponent extends React.Component {
     constructor(props) {
@@ -38,12 +39,14 @@ class TimerComponent extends React.Component {
         return (
             <div id="timer-container">
                 <div id="timer">
-                    <span id={"timer-label"}>
+                    <span className={ this.props.timeLeft < 16 ? "red-border" :
+                        this.props.timerLabel === "Session" ? 'orange-border' : 'green-border'
+                    } id="timer-label">
                         {this.props.timerLabel}
                     </span>
                     <div id="timer-controls-container">
                         <FontAwesomeIcon className="controls" icon={faSyncAlt} id="reset" onClick={this.props.reset} />
-                        <span className={this.props.alarmBlink ? "timer-blink" : ""} id="time-left">
+                        <span className={this.props.alarmBlink ? "blinker" : ""} id="time-left">
                             {this.getTimeDisplay()}
                             </span>
                         <FontAwesomeIcon className="controls" icon={startStopIcon} id="start-stop" onClick={this.props.startStop} /> 

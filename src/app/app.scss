@@ -1,0 +1,44 @@
+$transition-time: 1s ease-in-out;
+
+.orange-border {
+    border-color: orange;
+    transition: border-color $transition-time;
+}
+
+.green-border {
+    border-color: green;
+    transition: border-color $transition-time;
+}
+
+.red-border {
+    border-color: red;
+    transition: border-color $transition-time;
+}
+
+.orange-text {
+    color: orange;
+    transition: color $transition-time;
+}
+
+.green-text {
+    color: green;
+    transition: color $transition-time;
+}
+
+.red-text {
+    color: red;
+    transition: color $transition-time;
+}
+
+.blinker {
+    animation: blinker;
+    animation-duration: 0.6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    @keyframes blinker {
+        50% {
+            opacity: 0.4;
+        }
+    }
+}

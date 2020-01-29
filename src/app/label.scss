@@ -12,4 +12,17 @@
         cursor: pointer;
         font-size: 1.5em;
     }
+
+    .label-control:hover {
+        opacity: 0.5;
+        animation: enlarge;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+
+        @keyframes enlarge {
+            100% {
+                transform: scale(1.3);
+            }
+        }
+    }
 }
