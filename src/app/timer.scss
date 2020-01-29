@@ -1,4 +1,4 @@
-@import url(//db.onlinewebfonts.com/c/63f874d192fb3892d88d5e26f942b5e2?family=DS-Digital);
+@import url('../assets/font.css');
 
 #timer-container {
     width: 100%;
@@ -27,10 +27,9 @@
             align-items: center;
 
             #time-left {
-                margin-left: 0.2em;
-                margin-right: 0.1em;
+                margin-left: 0.1em;
                 display: block;
-                font-family: 'DS-Digital';
+                font-family: 'Digital-7';
                 font-size: 6em;
             }
         }

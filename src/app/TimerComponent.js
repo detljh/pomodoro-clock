@@ -1,5 +1,5 @@
 import React from 'react';
-import alarm from './beep.mp3';
+import alarm from '../assets/beep.mp3';
 import './timer.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
