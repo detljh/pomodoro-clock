@@ -11,7 +11,7 @@ class TimerComponent extends React.Component {
         this.getTimeDisplay = this.getTimeDisplay.bind(this);
         this.audio = React.createRef();
     }
-
+    // Test 23 4 58 change
     componentDidUpdate() {
         
         if (this.audio.current.currentTime >= this.audio.current.duration - 0.5) {
